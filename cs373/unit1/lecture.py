@@ -1,20 +1,15 @@
 from __future__ import division
 
-def _(key):
-    return not key
-
 R = 'red'
 G = 'green'
 WORLD = [G, R, R, G, G]
 hit_score = 0.6
 miss_score = 0.2
 
-
 def main():
     n = 5
     Z = R    
     p = [1 / n ] * n
-    print p
     
     print 'sense: ',
     _printf(sense(p, Z))

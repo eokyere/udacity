@@ -1,19 +1,8 @@
-from unit1 import links
+from lecture import links
 
 def main():
-    print 'Q1.'
-    q1()
+    print 'Q1.', q1()
     print 'Q2. ', q2()
-    print 'Q4. ', '%.4f' % q4() == '0.2998'
-    print 'Q6. ', q6() == 'udacious'
-    print 'Q7a. ', q7('hehehehohohoooo') == 10
-    print 'Q7b. ', q7('heheh') == -1
-    print 'Q8a. ', q8('zip files are zipped') == 14
-    print 'Q8b. ', q8('zip files are compressed') == -1
-    print 'Q8b. ', q8('zippperzi pzipzipzip') == 11
-    print 'Q9a. ', q9(3.14159) == '3'
-    print 'Q9b. ', q9(27.63) == '28'
-    
 
 def q1():
     page = """<html xmlns="http://www.w3.org/1999/xhtml">
@@ -29,19 +18,16 @@ It is the outgrowth of a free computer science class offered in 2011 through Sta
 </body>
 </html>"""
     xs = [x[0] for x in links(page)]
-    for s in ['http://www.w3.org/1999/xhtml',
+    search = ['http://www.w3.org/1999/xhtml',
               'http://www.wikipedia.org/wiki/Higher_education',
               'http://www.wikipedia.org/wiki/Sebastian_Thrun',
               'both high quality and low cost',
-              'http://www.wikipedia.org/wiki/Digital_Life_Design']:
-        print '%s --> %s' % (s, 'Found' if s in xs else 'NOT Found')
+              'http://www.wikipedia.org/wiki/Digital_Life_Design']
+    return [(s, s in xs) for s in xs]
 
 def q2():
     """Print the number of hours in 7 wks"""
-    hours_per_day = 24
-    days_per_week = 7
-    return 7 * days_per_week * hours_per_day
-    
+    return hours_in_weeks(7)
 
 def q4(nano=1):
     """Distance in meters that light travels in one nanosecond."""
@@ -67,6 +53,12 @@ def q8(text):
 def q9(x):
     s = str(round(x))
     return s[:s.find('.')]
+
+
+def hours_in_weeks(weeks):
+    hours_per_day = 24
+    days_per_week = 7
+    return weeks * days_per_week * hours_per_day
 
 if __name__ == "__main__":
     main()
