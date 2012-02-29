@@ -74,7 +74,7 @@ def xmove(p, U, o, u, pe, po, pu):
 def move(p, U):
     n = len(p)
     x = n - (U % n)
-    return p[x:]+ p[:x]
+    return p[x:] + p[:x]
 
 def _score(i, Z):
     return hit_score if Z == WORLD[i] else miss_score

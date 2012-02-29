@@ -3,7 +3,11 @@ import unittest
 class PatchedTestCase(unittest.TestCase):
     _assertAlmostEqual = unittest.TestCase.assertAlmostEqual
     def assertAlmostEqual(self, val0, val1, places=None, msg=None, delta=None):
+        if type(val0) is not type(val1):
+            print 'type of val0: ', type(val0)
+            print 'type of val1: ', type(val1)
         assert type(val0) is type(val1)
+        
         if type(val0) in [list, tuple]:
             assert len(val0) is len(val1)
             for val0, val1 in zip(val0, val1):
