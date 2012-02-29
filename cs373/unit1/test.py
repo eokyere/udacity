@@ -14,16 +14,16 @@ class HomeworkTests(testutil.PatchedTestCase):
                     [0.0, 1.0, 0.0],
                     [0.0, 0.0, 0.0]]
         
-        colors=[['green', 'green', 'green'],
-                ['green', 'red', 'green'],
-                ['green', 'green', 'green']]
+        colors=[[G, G, G],
+                [G, R, G],
+                [G, G, G]]
         
         robot = Robot(world=colors)
         robot.sensor = 1.0
         robot.movement = 1.0
         p = robot._p(len(colors), len(colors[0]))
         actual = robot.localize(p=p, 
-                                measurements=['red'], 
+                                measurements=[R], 
                                 motions=[0, 0])
         self.assertAlmostEqual(expected, actual)
 
@@ -31,15 +31,15 @@ class HomeworkTests(testutil.PatchedTestCase):
         expected = [[0.0, 0.0, 0.0],
                     [0.0, 0.5, 0.5],
                     [0.0, 0.0, 0.0]]
-        colors=[['green', 'green', 'green'],
-                ['green', 'red', 'red'],
-                ['green', 'green', 'green']]
+        colors=[[G, G, G],
+                [G, R, R],
+                [G, G, G]]
         
         robot = Robot(world=colors)
         robot.sensor = 1.0
         robot.movement = 1.0
         p = robot._p(len(colors), len(colors[0]))
-        actual = robot.localize(p=p, measurements=['red'], motions=[[0, 0]])
+        actual = robot.localize(p=p, measurements=[R], motions=[[0, 0]])
         self.assertAlmostEqual(expected, actual)
 
     def test_values_2(self):
@@ -47,14 +47,14 @@ class HomeworkTests(testutil.PatchedTestCase):
                     [0.06666, 0.26666, 0.26666],
                     [0.06666, 0.06666, 0.06666]]
         
-        colors=[['green', 'green', 'green'],
-                ['green', 'red', 'red'],
-                ['green', 'green', 'green']]
+        colors=[[G, G, G],
+                [G, R, R],
+                [G, G, G]]
         
         robot = Robot(world=colors)
         robot.sensor = 0.8
         robot.movement = 1.0
-        actual = robot.localize(measurements=['red'], motions=[[0, 0]])
+        actual = robot.localize(measurements=[R], motions=[[0, 0]])
         self.assertAlmostEqual(expected, actual, places=4)
 
     def test_values_3(self):
@@ -62,16 +62,16 @@ class HomeworkTests(testutil.PatchedTestCase):
                     [0.13333, 0.13333, 0.53333],
                     [0.03333, 0.03333, 0.03333]]
 
-        colors = [['green', 'green', 'green'],
-                  ['green', 'red', 'red'],
-                  ['green', 'green', 'green']]
+        colors = [[G, G, G],
+                  [G, R, R],
+                  [G, G, G]]
         
         robot = Robot(world=colors)
         robot.sensor = 0.8
         robot.movement = 1.0
         p = robot._p(len(colors), len(colors[0]))
         actual = robot.localize(p=p, 
-                                measurements=['red', 'red'], 
+                                measurements=[R, R], 
                                 motions=[[0, 0], [0, 1]])
         self.assertAlmostEqual(expected, actual, places=4)
         
@@ -80,16 +80,16 @@ class HomeworkTests(testutil.PatchedTestCase):
                     [0.0, 0.0, 1.0],
                     [0.0, 0.0, 0.0]]
 
-        colors = [['green', 'green', 'green'],
-                  ['green', 'red', 'red'],
-                  ['green', 'green', 'green']]
+        colors = [[G, G, G],
+                  [G, R, R],
+                  [G, G, G]]
         
         robot = Robot(world=colors)
         robot.sensor = 1.0
         robot.movement = 1.0
         p = robot._p(len(colors), len(colors[0]))
         actual = robot.localize(p=p, 
-                                measurements=['red', 'red'], 
+                                measurements=[R, R], 
                                 motions=[[0, 0], [0, 1]])
         self.assertAlmostEqual(expected, actual, places=4)
 
@@ -98,16 +98,16 @@ class HomeworkTests(testutil.PatchedTestCase):
                     [0.07246, 0.28985, 0.46376],
                     [0.02898, 0.02898, 0.02898]]
 
-        colors = [['green', 'green', 'green'],
-                  ['green', 'red', 'red'],
-                  ['green', 'green', 'green']]
+        colors = [[G, G, G],
+                  [G, R, R],
+                  [G, G, G]]
         
         robot = Robot(world=colors)
         robot.sensor = 0.8
         robot.movement = 0.5
         p = robot._p(len(colors), len(colors[0]))
         actual = robot.localize(p=p, 
-                                measurements=['red', 'red'], 
+                                measurements=[R, R], 
                                 motions=[[0, 0], [0, 1]])
         self.assertAlmostEqual(expected, actual, places=4)
 
@@ -116,16 +116,16 @@ class HomeworkTests(testutil.PatchedTestCase):
                     [0.0, 0.33333, 0.66666],
                     [0.0, 0.0, 0.0]]
 
-        colors = [['green', 'green', 'green'],
-                  ['green', 'red', 'red'],
-                  ['green', 'green', 'green']]
+        colors = [[G, G, G],
+                  [G, R, R],
+                  [G, G, G]]
         
         robot = Robot(world=colors)
         robot.sensor = 1.0
         robot.movement = 0.5
         p = robot._p(len(colors), len(colors[0]))
         actual = robot.localize(p=p, 
-                                measurements=['red', 'red'], 
+                                measurements=[R, R], 
                                 motions=[[0, 0], [0, 1]])
         self.assertAlmostEqual(expected, actual, places=4)
 
@@ -135,18 +135,18 @@ class HomeworkTests(testutil.PatchedTestCase):
                     [0.00739, 0.00894, 0.11272, 0.35350, 0.04065],
                     [0.00910, 0.00715, 0.01434, 0.04313, 0.03642]]
 
-        colors = [['red', 'green', 'green', 'red','red'],
-                  ['red', 'red', 'green', 'red', 'red'],
-                  ['red', 'red', 'green', 'green', 'red'],
-                  ['red', 'red', 'red', 'red', 'red']]
+        colors = [[R, G, G, R,R],
+                  [R, R, G, R, R],
+                  [R, R, G, G, R],
+                  [R, R, R, R, R]]
         
         robot = Robot(world=colors)
         robot.sensor = 0.7
         robot.movement = 0.8
         p = robot._p(len(colors), len(colors[0]))
         actual = robot.localize(p=p, 
-                                measurements=['green', 'green', 'green', 
-                                              'green', 'green'], 
+                                measurements=[G, G, G, 
+                                              G, G], 
                                 motions=[[0, 0], [0, 1], [1, 0], [1, 0], 
                                          [0, 1]])
         self.assertAlmostEqual(expected, actual, places=4)
@@ -156,16 +156,16 @@ class HomeworkTests(testutil.PatchedTestCase):
                     [1.0, 0.0, 0.0],
                     [0.0, 0.0, 0.0]]
 
-        colors = [['green', 'green', 'green'],
-                  ['red', 'red', 'green'],
-                  ['green', 'green', 'green']]
+        colors = [[G, G, G],
+                  [R, R, G],
+                  [G, G, G]]
         
         robot = Robot(world=colors)
         robot.sensor = 1.0
         robot.movement = 1.0
         p = robot._p(len(colors), len(colors[0]))
         actual = robot.localize(p=p, 
-                                measurements=['red', 'red'], 
+                                measurements=[R, R], 
                                 motions=[[0, 0], [0, -1]])
         self.assertAlmostEqual(expected, actual, places=1)
 
@@ -175,16 +175,16 @@ class HomeworkTests(testutil.PatchedTestCase):
                     [0.0, 0.0, 0.0],
                     [0.0, 0.0, 0.0]]
 
-        colors = [['green', 'red', 'green'],
-                  ['green', 'red', 'green'],
-                  ['green', 'green', 'green']]
+        colors = [[G, R, G],
+                  [G, R, G],
+                  [G, G, G]]
         
         robot = Robot(world=colors)
         robot.sensor = 1.0
         robot.movement = 1.0
         p = robot._p(len(colors), len(colors[0]))
         actual = robot.localize(p=p, 
-                                measurements=['red', 'red'], 
+                                measurements=[R, R], 
                                 motions=[[0, 0], [-1, 0]])
         self.assertAlmostEqual(expected, actual, places=1)
 
