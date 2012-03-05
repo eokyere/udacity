@@ -27,7 +27,10 @@ DOWN = 1
 RIGHT = 1
 LEFT = -1
 
-class Robot():
+class Robot(object):
+    """A wannabe robotic car called joy ;)
+    It is an implementation of a Histogram Filter.
+    """
     def __init__(self, world, sensor=None, movement=None):
         self.world = world
         self.sensor = sensor
@@ -70,7 +73,7 @@ class Robot():
                 elif x == LEFT:
                     p = [self._move(xs, len(xs) - 1) for xs in p]
                 
-                # if movement is None we assume movement has 1.0 accuracy
+                # if movement is None we assume 1.0 accuracy
                 if self.movement and self.movement < 1.0:
                     xs = zip([x * self.movement for x in self._flatten(p)], 
                              [x * (1.0 - self.movement) for x in _p])
@@ -102,11 +105,11 @@ class Robot():
 
 
 def main():
-    robot = Robot(world=colors)
-    robot.sensor = sensor_right
-    robot.movement = p_move
-    p = robot.localize(measurements=measurements, 
-                       motions=motions)
+    joy = Robot(world=colors)
+    joy.sensor = sensor_right
+    joy.movement = p_move
+    p = joy.localize(measurements=measurements, 
+                    motions=motions)
     
     #Your probability array must be printed 
     #with the following code.
