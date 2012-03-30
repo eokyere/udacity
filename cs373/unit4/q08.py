@@ -51,13 +51,12 @@ def _search(grid=grid, init=init, goal=goal):
     checked_nodes = []
     while open_nodes:
         # sort by g-value
-        open_nodes.sort(key=lambda x: x[0])
-        g, y, x = open_nodes[0]
+        open_nodes.sort(key=lambda x: x[0], reverse=True)
+        g, y, x = open_nodes.pop()
 
         if [y, x] ==  goal:
             return [g, y, x]
         
-        open_nodes = open_nodes[1:]
         checked_nodes.append([y, x])
 
         for d in delta:
