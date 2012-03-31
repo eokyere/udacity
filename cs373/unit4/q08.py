@@ -34,11 +34,6 @@ delta_name = ['^', '<', 'v', '>']
 
 cost = 1
 
-def move(grid, pos, dt):
-    pos = [pos[0] + dt[0], pos[1] + dt[1]]
-    valid = pos[0] >= 0 and pos[0] <= len(grid) - 1 and \
-            pos[1] >= 0 and pos[1] <= len(grid[0]) - 1
-    return pos if valid and grid[pos[0]][pos[1]] == 0 else None
 
 def search():
     # ----------------------------------------
@@ -64,6 +59,13 @@ def _search(grid=grid, init=init, goal=goal):
             if t and t not in checked_nodes:
                 open_nodes.append([g + 1] + t)
     return 'fail'
+
+def move(grid, pos, dt):
+    pos = [pos[0] + dt[0], pos[1] + dt[1]]
+    valid = pos[0] >= 0 and pos[0] <= len(grid) - 1 and \
+            pos[1] >= 0 and pos[1] <= len(grid[0]) - 1
+    return pos if valid and grid[pos[0]][pos[1]] == 0 else None
+
 
 print search() 
             
