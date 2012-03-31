@@ -34,6 +34,8 @@ cost = 1
 # modify code below
 # ----------------------------------------
 
+from q08 import move
+
 def search(grid=grid, init=init, goal=goal):
     goal, expand = _search(grid=grid)
     return expand #Leave this line for grading purposes!
@@ -42,7 +44,8 @@ def search(grid=grid, init=init, goal=goal):
 def _search(grid=grid, init=init, goal=goal):
     open_nodes = [[0] + init]
     checked_nodes = []
-    expansion = [[-1 for row in range(len(grid[0]))] for col in range(len(grid))]
+    expansion = [[-1 for col in range(len(grid[0]))] 
+                 for row in range(len(grid))]
     expansion_index = 0
     while open_nodes:
         # sort by g-value
@@ -65,13 +68,6 @@ def _search(grid=grid, init=init, goal=goal):
                 if new_node not in open_nodes:
                     open_nodes.append(new_node)
     return 'fail', expansion
-
-
-def move(grid, pos, dt):
-    pos = [pos[0] + dt[0], pos[1] + dt[1]]
-    valid = pos[0] >= 0 and pos[0] <= len(grid) - 1 and \
-            pos[1] >= 0 and pos[1] <= len(grid[0]) - 1
-    return pos if valid and grid[pos[0]][pos[1]] == 0 else None
 
 for row in search():
     print row

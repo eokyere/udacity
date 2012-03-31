@@ -75,9 +75,9 @@ class SearchTest(unittest.TestCase):
 
         # both policies are equally likely
         try:
-            self.assertEqual(policy1, q10.search(grid=grid))
+            self.assertEqual(policy1, q10.policy(grid=grid))
         except:
-            self.assertEqual(policy2, q10.search(grid=grid))
+            self.assertEqual(policy2, q10.policy(grid=grid))
             
         
 if __name__ == "__main__":

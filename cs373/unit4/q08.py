@@ -57,7 +57,10 @@ def _search(grid=grid, init=init, goal=goal):
         for d in delta:
             t = move(grid, [y, x], d)
             if t and t not in checked_nodes:
-                open_nodes.append([g + 1] + t)
+                new_node = [g + 1] + t
+                # use a set for here?
+                if new_node not in open_nodes:
+                    open_nodes.append(new_node)
     return 'fail'
 
 def move(grid, pos, dt):
