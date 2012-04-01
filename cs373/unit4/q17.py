@@ -44,24 +44,22 @@ def compute_value():
 def _compute_value(grid=grid, goal=goal):
     value = [[99 for col in range(len(grid[0]))]
              for row in range(len(grid))]
-    change = True
-    while change:
-        change = False
+    
+    value[goal[0]][goal[1]] = 0
+    
+    updated = True
+    while updated:
+        updated = False
         for y in xrange(len(grid)):
             for x in xrange(len(grid[0])):
-                if goal[0] == y and goal[1] == x:
-                    if value[y][x] > 0:
-                        value[y][x] = 0
-                        change = True
-                elif grid[y][x] == 0:
-                    for index, action in enumerate(delta):
+                if [y, x] != goal and grid[y][x] == 0:
+                    for action in delta:
                         pos = move(grid, [y, x], action)
                         if pos:
-                            y1, x1 = pos
-                            v = value[y1][x1] + cost_step
+                            v = value[pos[0]][pos[1]] + cost_step
                             if v < value[y][x]:
-                                change = True
                                 value[y][x] = v
+                                updated = True
     return value
 
 compute_value()

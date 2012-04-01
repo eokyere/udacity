@@ -128,6 +128,25 @@ class SearchTest(unittest.TestCase):
         
         
         self.assertEqual(expected, q17._compute_value(grid=grid, goal=goal))
+    
+    def test_value_function_with_cutoff(self):
+        grid = [[0, 0, 1, 0, 0, 0],
+                [0, 0, 1, 0, 0, 0],
+                [0, 0, 1, 0, 0, 0],
+                [0, 0, 1, 0, 1, 0],
+                [0, 0, 1, 1, 1, 0],
+                [0, 0, 0, 0, 1, 0]]
+        
+        expected = [[99, 99, 99,  7,  6,  5],
+                    [99, 99, 99,  6,  5,  4],
+                    [99, 99, 99,  5,  4,  3],
+                    [99, 99, 99,  6, 99,  2],
+                    [99, 99, 99, 99, 99,  1],
+                    [99, 99, 99, 99, 99,  0]]
+        
+        
+        goal = [len(grid)-1, len(grid[0])-1]
+        self.assertEqual(expected, q17._compute_value(grid=grid, goal=goal))
         
         
 if __name__ == "__main__":
