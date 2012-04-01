@@ -1,8 +1,6 @@
 import unittest
 
-import q08
-import q09
-import q10
+import q08, q09, q10, q12
 
 class SearchTest(unittest.TestCase):
     def test_search(self):
@@ -78,7 +76,21 @@ class SearchTest(unittest.TestCase):
             self.assertEqual(policy1, q10.policy(grid=grid))
         except:
             self.assertEqual(policy2, q10.policy(grid=grid))
-            
+    
+    def test_a_star(self):
+        grid = [[0, 1, 0, 0, 0, 0],
+                [0, 1, 0, 0, 0, 0],
+                [0, 1, 0, 0, 0, 0],
+                [0, 1, 0, 0, 0, 0],
+                [0, 0, 0, 0, 1, 0]]
+        
+        expected = [[0, -1, -1, -1, -1, -1],
+                    [1, -1, -1, -1, -1, -1],
+                    [2, -1, -1, -1, -1, -1],
+                    [3, -1,  8,  9, 10, 11],
+                    [4,  5,  6,  7, -1, 12]]
+        
+        self.assertEqual(expected, q12.search(grid=grid))
         
 if __name__ == "__main__":
     unittest.main()
