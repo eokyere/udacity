@@ -1,6 +1,6 @@
 import unittest
 
-import q08, q09, q10, q12
+import q08, q09, q10, q12, q17
 
 class SearchTest(unittest.TestCase):
     def test_search(self):
@@ -91,6 +91,44 @@ class SearchTest(unittest.TestCase):
                     [4,  5,  6,  7, -1, 12]]
         
         self.assertEqual(expected, q12.search(grid=grid))
+
+    def test_value_function(self):
+        grid = [[0, 0, 1, 0, 0, 0],
+                [0, 0, 1, 0, 0, 0],
+                [0, 0, 1, 0, 0, 0],
+                [0, 0, 0, 0, 1, 0],
+                [0, 0, 1, 1, 1, 0],
+                [0, 0, 0, 0, 1, 0]]
+        
+        expected = [[12, 11, 99,  7,  6,  5],
+                    [11, 10, 99,  6,  5,  4],
+                    [10,  9, 99,  5,  4,  3],
+                    [ 9,  8,  7,  6, 99,  2],
+                    [10,  9, 99, 99, 99,  1],
+                    [11, 10, 11, 12, 99,  0]]
+
+        goal = [len(grid)-1, len(grid[0])-1]
+
+        
+        self.assertEqual(expected, q17._compute_value(grid=grid, goal=goal))
+        
+        grid = [[0, 0, 0, 0, 0, 0],
+                [0, 0, 1, 0, 0, 0],
+                [0, 0, 1, 0, 0, 0],
+                [0, 0, 0, 0, 1, 0],
+                [0, 0, 1, 1, 1, 0],
+                [0, 0, 0, 0, 1, 0]]
+        
+        expected = [[10,  9,  8,  7,  6,  5],
+                    [11, 10, 99,  6,  5,  4],
+                    [10,  9, 99,  5,  4,  3],
+                    [ 9,  8,  7,  6, 99,  2],
+                    [10,  9, 99, 99, 99,  1],
+                    [11, 10, 11, 12, 99,  0]]
+        
+        
+        self.assertEqual(expected, q17._compute_value(grid=grid, goal=goal))
+        
         
 if __name__ == "__main__":
     unittest.main()

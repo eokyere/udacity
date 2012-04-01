@@ -33,9 +33,35 @@ cost_step = 1 # the cost associated with moving from a cell to an adjacent one.
 # insert code below
 # ----------------------------------------
 
-def compute_value():
+from q08 import move
 
+def compute_value():
+    value = _compute_value()
+    for row in value:
+        print row
     return value #make sure your function returns a grid of values as demonstrated in the previous video.
 
+def _compute_value(grid=grid, goal=goal):
+    value = [[99 for col in range(len(grid[0]))]
+             for row in range(len(grid))]
+    change = True
+    while change:
+        change = False
+        for y in xrange(len(grid)):
+            for x in xrange(len(grid[0])):
+                if goal[0] == y and goal[1] == x:
+                    if value[y][x] > 0:
+                        value[y][x] = 0
+                        change = True
+                elif grid[y][x] == 0:
+                    for index, action in enumerate(delta):
+                        pos = move(grid, [y, x], action)
+                        if pos:
+                            y1, x1 = pos
+                            v = value[y1][x1] + cost_step
+                            if v < value[y][x]:
+                                change = True
+                                value[y][x] = v
+    return value
 
-
+compute_value()

@@ -45,9 +45,6 @@ from q08 import move
 
 def search(grid=grid):
     result, expand = _search(grid=grid)
-    for row in expand:
-        print row
-
     return expand #Leave this line for grading purposes!
 
 def _search(grid=grid, init=init, goal=goal):
@@ -72,14 +69,10 @@ def _search(grid=grid, init=init, goal=goal):
         # sort by g-value
         unchecked.sort(reverse=True)
         
-        for row in unchecked:
-            print row
-        
         # expand
 #        f, g, h, action, y, x = unchecked.pop()
 #        print f, g, h, action, y, x
         f, g, y, x = unchecked.pop()
-        print f, g, y, x
         
         checked[y][x] = 1
 #        actions[y][x] = action
@@ -102,5 +95,3 @@ def _search(grid=grid, init=init, goal=goal):
                     if node not in unchecked:
                         unchecked.append(node)
     return FAIL, expansion
-
-search()
