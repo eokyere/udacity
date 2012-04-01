@@ -1,6 +1,6 @@
 import unittest
 
-import q08, q09, q10, q12, q17
+import q08, q09, q10, q12, q17, q18
 
 class SearchTest(unittest.TestCase):
     def test_search(self):
@@ -147,6 +147,25 @@ class SearchTest(unittest.TestCase):
         
         goal = [len(grid)-1, len(grid[0])-1]
         self.assertEqual(expected, q17._compute_value(grid=grid, goal=goal))
+    
+    def test_dynamic_programming_policy(self):
+        grid = [[0, 0, 1, 0, 0, 0],
+                [0, 0, 1, 0, 0, 0],
+                [0, 0, 1, 0, 0, 0],
+                [0, 0, 0, 0, 1, 0],
+                [0, 0, 1, 1, 1, 0],
+                [0, 0, 0, 0, 1, 0]]
+        
+        expected = [['v', 'v', ' ', 'v', 'v', 'v'],
+                    ['v', 'v', ' ', 'v', 'v', 'v'],
+                    ['v', 'v', ' ', '>', '>', 'v'],
+                    ['>', '>', '>', '^', ' ', 'v'],
+                    ['^', '^', ' ', ' ', ' ', 'v'],
+                    ['^', '^', '<', '<', ' ', '*']]
+
+        goal = [len(grid)-1, len(grid[0])-1]
+        _, policy = q18._optimum_policy(grid=grid, goal=goal)
+        self.assertEqual(expected, policy)
         
         
 if __name__ == "__main__":
