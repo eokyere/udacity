@@ -1,6 +1,7 @@
 import unittest
 
-import q08, q09, q10, q12, q17, q18
+import q08, q09, q10, q12, q17, q18, q19
+import homework
 
 class SearchTest(unittest.TestCase):
     def test_search(self):
@@ -167,7 +168,95 @@ class SearchTest(unittest.TestCase):
         _, policy = q18._optimum_policy(grid=grid, goal=goal)
         self.assertEqual(expected, policy)
         
+    
+    def test_turn_policy(self):
+        init = [4, 3, 0]
+        grid = [[1, 1, 1, 0, 0, 0],
+                [1, 1, 1, 0, 1, 0],
+                [0, 0, 0, 0, 0, 0],
+                [1, 1, 1, 0, 1, 1],
+                [1, 1, 1, 0, 1, 1]]
+        goal = [2, 0]        
+        cost = [2, 1, 1]
+        expected = [[' ', ' ', ' ', ' ', ' ', ' '],
+                    [' ', ' ', ' ', ' ', ' ', ' '],
+                    ['*', '#', '#', 'L', ' ', ' '],
+                    [' ', ' ', ' ', '#', ' ', ' '],
+                    [' ', ' ', ' ', '#', ' ', ' ']]
+    
+        self.assertEqual(expected, q19._optimum_policy2d(grid, init, goal, cost))
+
+        cost = [2, 1, 20]
+        expected = [[' ', ' ', ' ', 'R', '#', 'R'],
+                    [' ', ' ', ' ', '#', ' ', '#'],
+                    ['*', '#', '#', '#', '#', 'R'],
+                    [' ', ' ', ' ', '#', ' ', ' '],
+                    [' ', ' ', ' ', '#', ' ', ' ']]
+    
+        self.assertEqual(expected, q19._optimum_policy2d(grid, init, goal, cost))
+
+
+class PatchedTestCase(unittest.TestCase):
+    _assertAlmostEqual = unittest.TestCase.assertAlmostEqual
+    def assertAlmostEqual(self, val0, val1, places=None, msg=None, delta=None):
+        if type(val0) is not type(val1):
+            print 'type of val0: ', type(val0), val0
+            print 'type of val1: ', type(val1), val1
+        assert type(val0) is type(val1)
         
+        if type(val0) in [list, tuple]:
+            assert len(val0) is len(val1)
+            for val0, val1 in zip(val0, val1):
+                self.assertAlmostEqual(val0, val1, places, msg, delta)
+        else:
+            self._assertAlmostEqual(val0, val1, places, msg, delta)
+
+
+class HomeworkTest(PatchedTestCase):
+    def test_homework(self):
+        grid = [[0, 0, 0],
+                [0, 0, 0]]
+        goal = [0, len(grid[0]) - 1]
+        expected_value = [[60.472, 37.193, 0.],
+                          [63.503, 44.770, 37.193]]
+        expected_policy = [['>', '>', '*'],
+                           ['>', '^', '^']]
+        
+        value, policy = homework._stochastic_value(grid, goal)
+        self.assertEqual(expected_policy, policy)
+        self.assertAlmostEqual(expected_value, value, 3)
+
+        grid = [[0, 1, 0],
+                [0, 0, 0]]
+        expected_value = [[94.041, 1000., 0.000],
+                          [86.082, 73.143, 44.286]]
+        expected_policy = [['v', ' ', '*'],
+                           ['>', '>', '^']]
+        
+        value, policy = homework._stochastic_value(grid, goal)
+        self.assertEqual(expected_policy, policy)
+        self.assertAlmostEqual(expected_value, value, 3)
+
+    def test_homework_larger_grid(self):
+        grid = [[0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 1, 1, 0]]
+        goal = [0, len(grid[0]) - 1]
+        expected_value = [[57.903, 40.278, 26.066, 0.000],
+                          [47.055, 36.572, 29.994, 27.270],
+                          [53.172, 42.023, 37.775, 45.092],
+                          [77.586, 1000., 1000., 73.546]]
+        expected_policy = [['>', 'v', 'v', '*'],
+                           ['>', '>', '^', '<'],
+                           ['>', '^', '^', '<'],
+                           ['^', ' ', ' ', '^']]
+        
+        value, policy = homework._stochastic_value(grid, goal)
+        self.assertEqual(expected_policy, policy)
+        self.assertAlmostEqual(expected_value, value, 3)
+
+
 if __name__ == "__main__":
     unittest.main()
         
